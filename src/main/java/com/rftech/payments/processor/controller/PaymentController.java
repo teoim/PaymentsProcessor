@@ -1,12 +1,10 @@
 package com.rftech.payments.processor.controller;
 
 import com.rftech.payments.processor.controller.dto.PaymentDTO;
-import com.rftech.payments.processor.repository.dao.PaymentDAO;
+import com.rftech.payments.processor.controller.dto.PaymentsPageDTO;
 import com.rftech.payments.processor.service.PaymentService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +19,22 @@ public class PaymentController {
     PaymentService paymentService;
 
     @GetMapping("/payments")
-    public @ResponseBody List<PaymentDAO> getAllPayments(HttpServletRequest http){
+    public @ResponseBody List<PaymentDTO> getAllPayments() {
         log.info("PaymentController.getAllPayments()");
 
         return paymentService.getAllPayments();
+    }
+
+    @GetMapping("/payments-pagination")
+    public @ResponseBody ResponseEntity<PaymentsPageDTO> getAllPaymentsWithPagination(
+            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) int pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
+    ){
+        log.info("PaymentController.getAllPaymentsWithPagination({},{})", pageNumber, pageSize);
+
+        PaymentsPageDTO results = paymentService.getAllPaymentsWithPagination(pageNumber, pageSize);
+
+        return new ResponseEntity<>(results, HttpStatus.OK);
     }
 
     @GetMapping("/payments/{id}")

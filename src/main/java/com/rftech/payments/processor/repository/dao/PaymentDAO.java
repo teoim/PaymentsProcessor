@@ -1,9 +1,6 @@
 package com.rftech.payments.processor.repository.dao;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +21,7 @@ public class PaymentDAO {
     private String currency;
     private String fromAccount;
     private String toAccount;
+    @Column(columnDefinition = "TIMESTAMP(9)")
     private Timestamp timestamp;
 
 }

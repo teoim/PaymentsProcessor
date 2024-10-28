@@ -3,6 +3,7 @@
 
 ### Simple payment processor API exposing 4 endpoints:
 - `GET /payments` 
+- `GET /payments-pagination` (*pageNumber* and *pageSize* as integer request parameters)
 - `GET /payments/{id}` 
 - `POST /payments` 
 - `DELETE /payments/{id}`
@@ -16,10 +17,10 @@
 #### This is currently the official Spring-recommended way of building docker images for Spring applications. It will do so starting from a light(er) base docker image.
 
 #### Download the image: 
-- `docker pull teoim/payment-processor:0.0.1-SNAPSHOT`
+- `docker pull teoim/payment-processor:latest`
 #### Run image: 
 In the following commands, please replace the <local-port> and <desired-container-name> by, respectively, an available port on your machine and a name for the running container.
-- `docker run -p <local-port>:8080 --name <desired-container-name> teoim/payment-processor:0.0.1-SNAPSHOT`  
+- `docker run -p <local-port>:8080 --name <desired-container-name> teoim/payment-processor:latest`  
 
 This will map the <local-port> to the docker container internal port 8080, where the app will be listening for requests.  
 The app will now be reachable at `http://localhost:<local-port>/payments` 
@@ -32,7 +33,7 @@ The app will now be reachable at `http://localhost:<local-port>/payments`
 - User Name: `sa`
 - Password: \<empty password\>
 
-### The database is automatically created at startup based on the settings from the `application.properties` file.
+### The `payments` database is automatically created at startup based on the settings from the `application.properties` file.
 
 ### The `payment` table and fields are also automatically created at startup, through JPA based on the `com/rftech/payments/processor/repository/dao/PaymentDAO.java` entity.
 
