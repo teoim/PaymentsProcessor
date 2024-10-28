@@ -1,7 +1,7 @@
 
 # **Payments processor**
 
-### Simple payment processor API exposing 4 endpoints:
+### Simple payment processor API exposing 5 endpoints:
 - `GET /payments` 
 - `GET /payments-pagination` (*pageNumber* and *pageSize* as integer request parameters)
 - `GET /payments/{id}` 
